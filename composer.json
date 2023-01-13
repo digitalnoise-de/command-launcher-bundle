@@ -4,7 +4,7 @@
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "Michael\\CommandLauncherBundle\\": "src/"
+            "Digitalnoise\\CommandLauncherBundle\\": "src/"
         }
     },
     "authors": [
