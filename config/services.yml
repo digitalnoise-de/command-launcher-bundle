@@ -1,0 +1,3 @@
+services:
+    Digitalnoise\CommandLauncherBundle\Command\CommandLauncherCommand:
+        public: true
