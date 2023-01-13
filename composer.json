@@ -1,0 +1,25 @@
+{
+    "name": "michael/command-launcher-bundle",
+    "type": "symfony-bundle",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Michael\\CommandLauncherBundle\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Michael Ommen",
+            "email": "michael.ommen@digitalnoise.de"
+        },
+        {
+            "name": "Philip Weinke",
+            "email": "philip.weinke@digitalnoise.de"
+        }
+    ],
+    "require": {
+        "php": ">=8.1",
+        "digitalnoise/command-launcher": "dev-dev",
+        "symfony/framework-bundle": "^5.4"
+    }
+}
