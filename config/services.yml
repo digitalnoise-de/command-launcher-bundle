@@ -2,5 +2,3 @@ services:
     Digitalnoise\CommandLauncherBundle\Command\CommandLauncherCommand:
         tags: ['console.command']
         public: true
-        arguments:
-            $command: '@Digitalnoise\CommandLauncher\LaunchCommand'
