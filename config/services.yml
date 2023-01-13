@@ -1,3 +1,4 @@
 services:
     Digitalnoise\CommandLauncherBundle\Command\CommandLauncherCommand:
+        tags: ['console.command']
         public: true
