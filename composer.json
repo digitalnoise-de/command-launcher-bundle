@@ -1,5 +1,5 @@
 {
-    "name": "d3myon/command-launcher-bundle",
+    "name": "digitalnoise/command-launcher-bundle",
     "type": "symfony-bundle",
     "license": "MIT",
     "autoload": {
