@@ -1,4 +1,4 @@
-# Digitalnoise CommandLauncherBundle
+# digitalnoise CommandLauncherBundle
 
 ---
 
