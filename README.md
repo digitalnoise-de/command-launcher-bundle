@@ -193,7 +193,6 @@ Digitalnoise\CommandLauncher\CommandLauncher:
     alias: 'Acme\Command\CommandLauncher\CommandLauncher'
 
 Acme\Command\CommandLauncher\Resolvers\UserIdResolver:
-Acme\Command\CommandLauncher\Resolvers\MacrotrendIdResolver:
 
 Digitalnoise\CommandLauncherBundle\Command\CommandLauncherCommand:
     arguments:
