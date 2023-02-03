@@ -29,7 +29,7 @@ final class SymfonyMessengerCommandProvider implements CommandProvider
         foreach ($finder as $item) {
             try {
                 $rc = $this->reflectionClass($item);
-            } catch ( ReflectionException $exception ) {
+            } catch ( ReflectionException|RuntimeException $exception ) {
                 continue;
             }
 
@@ -48,7 +48,7 @@ final class SymfonyMessengerCommandProvider implements CommandProvider
 
                 try {
                     $invoke = $rc->getMethod('__invoke');
-                } catch ( ReflectionException|RuntimeException $exception ) {
+                } catch ( ReflectionException $exception ) {
                     continue;
                 }
 
