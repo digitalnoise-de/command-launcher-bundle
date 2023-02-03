@@ -20,11 +20,15 @@ final class CommandLauncherCommand extends Command
         private readonly CommandProvider $commandProvider,
         private readonly CommandLauncher $commandLauncher,
         /** @var list<ParameterResolver> */
-        private readonly array $parameterResolvers = []
+        private readonly iterable $parameterResolvers = []
     ) {
         parent::__construct();
 
-        $this->command = new LaunchCommand($this->commandProvider, $this->commandLauncher, $this->parameterResolvers);
+        $parameterResolvers = [];
+        foreach ($this->parameterResolvers as $parameterResolver) {
+            $parameterResolvers[] = $parameterResolver;
+        }
+        $this->command = new LaunchCommand($this->commandProvider, $this->commandLauncher, $parameterResolvers);
     }
 
     protected function configure(): void

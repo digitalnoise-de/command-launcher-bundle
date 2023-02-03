@@ -1,14 +1,20 @@
 services:
+    _instanceof:
+        # services whose classes are instances of CustomInterface will be tagged automatically
+        Digitalnoise\CommandLauncher\ParameterResolver:
+            tags: ['digitalnoise.parameter_resolver']
+
     Digitalnoise\CommandLauncherBundle\Command\CommandLauncherCommand:
         arguments:
             $commandProvider: '@Digitalnoise\CommandLauncherBundle\CommandProvider\SymfonyMessengerCommandProvider'
             $commandLauncher: '@Digitalnoise\CommandLauncherBundle\CommandLauncher\SymfonyCommandLauncher'
+            $parameterResolvers: !tagged_iterator digitalnoise.parameter_resolver
         tags: [ 'console.command' ]
         public: true
 
     Digitalnoise\CommandLauncherBundle\CommandProvider\SymfonyMessengerCommandProvider:
         arguments:
-            $rootDir: '%kernel.project_dir%'
+            $rootDir: '%kernel.project_dir%/src'
 
     Digitalnoise\CommandLauncherBundle\CommandLauncher\SymfonyCommandLauncher:
         arguments:
