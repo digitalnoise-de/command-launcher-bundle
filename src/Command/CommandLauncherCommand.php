@@ -20,7 +20,7 @@ final class CommandLauncherCommand extends Command
         private readonly CommandProvider $commandProvider,
         private readonly CommandLauncher $commandLauncher,
         /** @var list<ParameterResolver> */
-        private readonly array $parameterResolvers
+        private readonly array $parameterResolvers = []
     ) {
         parent::__construct();
 
