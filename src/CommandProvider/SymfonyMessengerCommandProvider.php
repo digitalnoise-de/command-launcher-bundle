@@ -48,7 +48,7 @@ final class SymfonyMessengerCommandProvider implements CommandProvider
 
                 try {
                     $invoke = $rc->getMethod('__invoke');
-                } catch ( ReflectionException $exception ) {
+                } catch ( ReflectionException|RuntimeException $exception ) {
                     continue;
                 }
 
