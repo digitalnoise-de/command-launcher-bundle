@@ -2,9 +2,14 @@ services:
     Digitalnoise\CommandLauncherBundle\Command\CommandLauncherCommand:
         arguments:
             $commandProvider: '@Digitalnoise\CommandLauncherBundle\CommandProvider\SymfonyMessengerCommandProvider'
-        tags: ['console.command']
+            $commandLauncher: '@Digitalnoise\CommandLauncherBundle\CommandLauncher\SymfonyCommandLauncher'
+        tags: [ 'console.command' ]
         public: true
 
     Digitalnoise\CommandLauncherBundle\CommandProvider\SymfonyMessengerCommandProvider:
         arguments:
             $rootDir: '%kernel.project_dir%'
+
+    Digitalnoise\CommandLauncherBundle\CommandLauncher\SymfonyCommandLauncher:
+        arguments:
+            $messageBus: '@messenger.routable_message_bus'
