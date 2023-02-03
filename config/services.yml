@@ -1,11 +1,10 @@
 services:
     Digitalnoise\CommandLauncherBundle\Command\CommandLauncherCommand:
+        arguments:
+            $commandProvider: '@Digitalnoise\CommandLauncherBundle\CommandProvider\SymfonyMessengerCommandProvider'
         tags: ['console.command']
         public: true
 
     Digitalnoise\CommandLauncherBundle\CommandProvider\SymfonyMessengerCommandProvider:
         arguments:
             $rootDir: '%kernel.project_dir%'
-
-    Digitalnoise\CommandLauncher\CommandProvider:
-        alias: Digitalnoise\CommandLauncherBundle\CommandProvider\SymfonyMessengerCommandProvider
