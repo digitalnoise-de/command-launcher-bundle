@@ -1,8 +1,4 @@
 services:
-    _instanceof:
-        Digitalnoise\CommandLauncher\ParameterResolver:
-            tags: ['digitalnoise.parameter_resolver']
-
     Digitalnoise\CommandLauncherBundle\Command\CommandLauncherCommand:
         arguments:
             $commandProvider: '@Digitalnoise\CommandLauncherBundle\CommandProvider\SymfonyMessengerCommandProvider'
