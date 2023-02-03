@@ -9,6 +9,7 @@ use ReflectionException;
 use RuntimeException;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
+use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 
 final class SymfonyMessengerCommandProvider implements CommandProvider
 {
@@ -33,39 +34,31 @@ final class SymfonyMessengerCommandProvider implements CommandProvider
                 continue;
             }
 
-            $attributes = $rc->getAttributes();
-
-            if (count($attributes) === 0) {
+            if (!$this->isMessageHandler($rc)) {
                 continue;
             }
 
-            foreach ($attributes as $attribute) {
-                if ($attribute->getName() !== AsMessageHandler::class) {
-                    continue;
-                }
+            $invoke = null;
 
-                $invoke = null;
-
-                try {
-                    $invoke = $rc->getMethod('__invoke');
-                } catch ( ReflectionException $exception ) {
-                    continue;
-                }
-
-                $parameters = $invoke->getParameters();
-
-                if (count($parameters) === 0) {
-                    continue;
-                }
-
-                $parameterType = $parameters[0]->getType();
-
-                if ($parameterType->isBuiltin()) {
-                    continue;
-                }
-
-                $messages[] = $parameterType->getName();
+            try {
+                $invoke = $rc->getMethod('__invoke');
+            } catch ( ReflectionException $exception ) {
+                continue;
             }
+
+            $parameters = $invoke->getParameters();
+
+            if (count($parameters) === 0) {
+                continue;
+            }
+
+            $parameterType = $parameters[0]->getType();
+
+            if ($parameterType->isBuiltin()) {
+                continue;
+            }
+
+            $messages[] = $parameterType->getName();
         }
 
         return $messages;
@@ -112,5 +105,26 @@ final class SymfonyMessengerCommandProvider implements CommandProvider
         $path = sprintf('%s\%s', $namespaceMatches, $classMatches);
 
         return new ReflectionClass($path);
+    }
+
+    private function isMessageHandler(ReflectionClass $rc): bool
+    {
+        if ($rc->implementsInterface(MessageHandlerInterface::class)) {
+            return true;
+        }
+
+        $attributes = $rc->getAttributes();
+
+        if (count($attributes) === 0) {
+            return false;
+        }
+
+        foreach ($attributes as $attribute) {
+            if ($attribute->getName() === AsMessageHandler::class) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }
