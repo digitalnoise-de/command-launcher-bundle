@@ -27,7 +27,11 @@ final class SymfonyMessengerCommandProvider implements CommandProvider
         $messages = [];
 
         foreach ($finder as $item) {
-            $rc = $this->reflectionClass($item);
+            try {
+                $rc = $this->reflectionClass($item);
+            } catch ( ReflectionException $exception ) {
+                continue;
+            }
 
             $attributes = $rc->getAttributes();
 
