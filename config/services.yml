@@ -1,6 +1,5 @@
 services:
     _instanceof:
-        # services whose classes are instances of CustomInterface will be tagged automatically
         Digitalnoise\CommandLauncher\ParameterResolver:
             tags: ['digitalnoise.parameter_resolver']
 
