@@ -25,7 +25,7 @@
     ],
     "require": {
         "php": ">=8.1",
-        "digitalnoise/command-launcher": "^v1.0.0",
+        "digitalnoise/command-launcher": "^v2.0.0",
         "symfony/framework-bundle": "^5.4"
     },
     "require-dev": {
