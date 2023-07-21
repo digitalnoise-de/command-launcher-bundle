@@ -118,22 +118,18 @@ This interface is responsible for the execution of a message. The implentation w
 public function launch(object $command): void;
 ```
 
-### 3. The ParameterResolver interface
+### 3. The abstract ParameterResolver
 
 ```php
-/**
- * @param class-string $class
- */
-public function supports(string $class): bool;
+abstract public function supports(string $class): bool;
 
-/**
- * @param class-string $class
- *
- * @return list<ParameterOption>
- */
-public function options(string $class): array;
+abstract public function options(string $class): array;
 
-public function value(string $key): mixed;
+...
+
+abstract public function value(string $key): mixed;
+
+abstract public function manualValue(string $input): mixed;
 ```
 
 Let's call the upper example with the user activation to mind. Here, we **don't pass a string** to the message, but rather an **object of the class UserId**.
@@ -170,7 +166,20 @@ public function value(string $key): mixed
 }
 ```
 
-Let's ignore the fact, that the user will be fetched inspite of being so some seconds before. It's your choice, how you want to hold the data inside your `UserIdProvider` class. This is the value, which is actually passed to the message, when it's built.
+Let's ignore the fact, that the user will be fetched inspite of being so some seconds before. It's your choice, how you 
+want to hold the data inside your `UserIdProvider` class. This is the value, which is actually passed to the message, 
+when it's built.
+
+```php
+public function manualValue(string $input): mixed
+{
+    return UserId::fromString($input);
+}
+```
+
+Since the last update, it is possible to define a manual input value. In the case, that an option won't be listed for any
+unexpected reason, you can type a custom value and this one will be process inside the `manualValue` function. The option
+will be listed by default, but the implementation, how the manual input will be used, is up to you.
 
 ## Bring it all together and use the command
 
